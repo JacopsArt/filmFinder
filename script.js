@@ -1,5 +1,3 @@
-//const e = require("express");
-
 // "convert" movies to li
 const ulTag = document.getElementById("movieList");
 
@@ -23,108 +21,87 @@ function addMoviesToDom(movies) {
     //set source img
     listImg.src = e.poster;
   });
-};
+}
 
 addMoviesToDom(movies);
 
+//search input
+function searchInput() {
+  const inputField = document.getElementById("filterInput");
 
+  // add eventlistener
+  inputField.addEventListener("keyup", (e) => {
+    // empty list
+    addRemove();
+    // define search value
+    const searchString = e.target.value;
+    // filter through movie titles
+    const filteredTitles = movies.filter((i) =>
+      i.title.toLowerCase().includes(searchString)
+    );
+    addMoviesToDom(filteredTitles);
+  });
+}
+searchInput();
 
-
-
-//function handleOnChangeEvent("change", )
+//function handleOnChangeEvent
 function handleOnChangeEvent() {
-  document.getElementsByName("filter", handleRadioClick).forEach((i) => {
+  document.getElementsByName("filter").forEach((i) => {
     i.addEventListener("change", (event) => {
-
-
       switch (event.target.value) {
         case (id = "latest-movies"):
-          filterLatestMovies = movies
-            .filter((movies) => movies.year > 2014);
+          addRemove();
+          const filterLatestMovies = movies.filter(
+            (movies) => movies.year > 2014
+          );
           addMoviesToDom(filterLatestMovies);
           console.log(filterLatestMovies);
-          
-          //empty();
           break;
         case (id = "avenger-movies"):
-          filterAvenger = movies
-            .filter((i) => i.title.toLowerCase().includes("avenger"))   
+          addRemove();
+          filterAvenger = movies.filter((i) =>
+            i.title.toLowerCase().includes("avenger")
+          );
           addMoviesToDom(filterAvenger);
           console.log(filterAvenger);
-          addRemove()
-          //empty();
           break;
         case (id = "x-men-movies"):
-          filterXMen = movies
-            .filter((i) => i.title.toLowerCase().includes("x-men"))
+          addRemove();
+          filterXMen = movies.filter((i) =>
+            i.title.toLowerCase().includes("x-men")
+          );
           addMoviesToDom(filterXMen);
           console.log(filterXMen);
-          //empty();
-          addRemove()
           break;
         case (id = "princess-movies"):
-          filterPrincess = movies
-            .filter((i) => i.title.toLowerCase().includes("princess"))
+          addRemove();
+          filterPrincess = movies.filter((i) =>
+            i.title.toLowerCase().includes("princess")
+          );
           addMoviesToDom(filterPrincess);
           console.log(filterPrincess);
-          addRemove()
-          //empty();
           break;
         case (id = "batman-movies"):
-          filterBatman = movies
-            .filter((i) => i.title.toLowerCase().includes("batman"))
+          addRemove();
+          filterBatman = movies.filter((i) =>
+            i.title.toLowerCase().includes("batman")
+          );
           addMoviesToDom(filterBatman);
           console.log(filterBatman);
-          addRemove()
-          //empty();
           break;
         default:
-          console.log(addMoviesToDom(movies));
+          addMoviesToDom(movies);
       }
     });
   });
 }
 
-handleOnChangeEvent(movies)
+handleOnChangeEvent(movies);
 
+// function to remove movies from list before adding
 function addRemove() {
-  const movieList = document.querySelectorAll("img");
+  const movieList = document.querySelectorAll("li");
   console.log("emptying");
-  //console.log("Movielist",movieList)
-  movieList.forEach((img) => img.appendChild());
-  while (movieList.firstChild) {
-    console.log("removing");
-    movieList.removeChild(movieList.firstChild);
-  }
+  console.log("filtered movielist", movieList);
+  movieList.forEach((element) => element.remove());
 }
-
-
-  function empty() {
-    const movieList = document.querySelectorAll("poster");
-    console.log("emptying");
-    movieList.forEach((element) => element.remove());
-    while (movieList.firstChild) {
-      console.log("removing");
-      movieList.removeChild(movieList.firstChild);
-    }
-  }
-
-// function addRemove() {
-//   if (document.getElementsByName('filter').checked) {
-//     box.style.display = 'block';
-//   } else {
-//     box.style.display = 'none';
-//   }
-// }
-
-// function handleRadioClick() {
-
-//   //document.addEventListener("DOMContentLoaded", handler);
-
-//   if (document.getElementsByName('filter').checked) {
-    
-//     //box.style.display = 'block';
-//   } else {
-//     //box.style.display = 'none';
-//   }
-// }
