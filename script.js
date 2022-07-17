@@ -20,6 +20,8 @@ function addMoviesToDom(movies) {
     aTag.href = "https://www.imdb.com/title/" + e.imdbID;
     //set source img
     listImg.src = e.poster;
+    //open link in new tab
+    aTag.setAttribute("target", "_blank");
   });
 }
 
